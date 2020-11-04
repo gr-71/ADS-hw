@@ -22,7 +22,7 @@ public class LinkedStackImpl<E> implements Stack<E> {
 
     @Override
     public E peek() {
-        return data.getFirst();
+        return (E) data.getFirst();
     }
 
     @Override

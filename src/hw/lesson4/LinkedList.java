@@ -1,6 +1,6 @@
 package hw.lesson4;
 
-public interface LinkedList<E> {
+public interface LinkedList<E> extends Iterable<E>{
 
     /**
      * O(1)
@@ -35,8 +35,7 @@ public interface LinkedList<E> {
 
     void display();
 
-    E getFirst();
-
+    Node<E> getFirst();
 
     class Node<E> {
         E item;
@@ -45,6 +44,10 @@ public interface LinkedList<E> {
         public Node(E item, Node<E> next) {
             this.item = item;
             this.next = next;
+        }
+
+        public Node(E item) {
+            this.item = item;
         }
     }
 }
