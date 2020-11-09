@@ -4,6 +4,7 @@ import hw.lesson3.queue.Queue;
 import hw.lesson3.stack.Stack;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 public class TestMain4 {
@@ -12,7 +13,8 @@ public class TestMain4 {
 //        testLinkedList();
 //        testStack();
 //        testQueue();
-        testForEach();
+//        testForEach();
+        myIteratorTest();
     }
 
     private static void testForEach() {
@@ -104,4 +106,36 @@ public class TestMain4 {
             System.out.println(queue.remove());
         }
     }
+
+    public static void myIteratorTest(){
+
+        List<Integer> newList = new java.util.LinkedList<>();
+        for (int i = 1; i <= 5; i++) {
+            newList.add(i);
+        }
+        for (Integer item : newList) {
+            System.out.println(item);
+        }
+        System.out.println("* * * * * * *");
+
+        Iterator<Integer> newIterator = newList.iterator();
+        while (newIterator.hasNext()) {
+            Integer item = newIterator.next();
+            System.out.println(item);
+        }
+        System.out.println("* * * * * * *");
+
+        LinkedList<Integer> simpleLinkedList = new SimpleLinkedListImpl<>();
+        for (int i = 1; i <= 5 ; i++) {
+            simpleLinkedList.insertFirst(i);
+        }
+        LinkedList.Node<Integer> item = simpleLinkedList.getFirst();
+        while (item != null) {
+            Integer value = item.item;
+            System.out.println(value);
+            item = item.next;
+        }
+        System.out.println("* * * * * * *");
+    }
+
 }

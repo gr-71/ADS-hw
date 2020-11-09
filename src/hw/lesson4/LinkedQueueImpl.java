@@ -23,7 +23,7 @@ public class LinkedQueueImpl<E> implements Queue<E> {
 
     @Override
     public E peekHead() {
-        return data.getFirst();
+        return (E) data.getFirst();
     }
 
     @Override
