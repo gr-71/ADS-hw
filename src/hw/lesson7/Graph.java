@@ -139,9 +139,70 @@ public class Graph {
         stack.push(vertex);
         vertex.setVisited(true);
     }
+
     private void visitVertex(Vertex vertex, Queue<Vertex> queue) {
         System.out.println(vertex);
         queue.add(vertex);
         vertex.setVisited(true);
+    }
+
+    public Stack<String> searchBfsShortestWay(String startLabel, String endLabel) {
+
+        int startIndex = indexOf(startLabel);
+
+        int endIndex = indexOf(endLabel);
+
+        if (startIndex == -1) {
+            throw new IllegalArgumentException("There is wrong start label: " + startLabel);
+        } else if (endIndex == -1) {
+            throw new IllegalArgumentException("There is wrong end label: " + endLabel);
+        }
+
+        Queue<Vertex> queue = new ArrayDeque<>();
+
+        Vertex vertex = vertexList.get(startIndex);
+
+        visitVertex(vertex, queue);
+
+        while (!queue.isEmpty()) {
+            vertex = getNearUnvisitedVertex(queue.peek());
+            if (vertex == null) {
+                queue.remove();
+            } else {
+                visitVertex(vertex, queue);
+                vertex.setVertexBefore(queue.peek());
+                if (vertex.getLabel().equals(endLabel)) {
+                    return createWay(vertex);
+                }
+            }
+        }
+        resetVertexState();
+        return null;
+    }
+
+    private Stack<String> createWay(Vertex vertex) {
+        Stack<String> stack = new Stack<>();
+        Vertex currentVertex = vertex;
+        while (currentVertex != null) {
+            stack.push(currentVertex.getLabel());
+            currentVertex = currentVertex.getVertexBefore();
+        }
+        return stack;
+    }
+
+    protected void displayShortestWay(Stack<String> way) {
+
+        StringBuilder sb = new StringBuilder();
+
+        boolean isStart = true;
+
+        while ( !way.isEmpty() ) {
+            if (!isStart) {
+                sb.append(" -> ");
+            }
+            isStart = false;
+            sb.append(way.pop());
+        }
+        System.out.println("The shortest way between two cities (vertexes) is: " + sb);
     }
 }
