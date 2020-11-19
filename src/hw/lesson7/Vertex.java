@@ -6,6 +6,16 @@ public class Vertex {
     private final String label;
     private boolean visited;
 
+    private Vertex vertexBefore;
+
+    public Vertex getVertexBefore() {
+        return vertexBefore;
+    }
+
+    public void setVertexBefore(Vertex vertexBefore) {
+        this.vertexBefore = vertexBefore;
+    }
+
     public Vertex(String label) {
         this.label = label;
     }
